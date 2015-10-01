@@ -24,6 +24,9 @@
         },
         _loadTemplate: function() { 
             var self = this;
+            if (self.settings.template) {
+                return;
+            }
             $.ajax({
                 url : self.settings.tmpl_path + 'month.html',
                 type : 'get',
