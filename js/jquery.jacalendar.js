@@ -45,7 +45,7 @@
             return result;
         },
         _getData: function(){
-            var start = this.today.startOf('month').subtract(this.today.startOf('month').day(), 'day');
+            var start = this.today.clone().startOf('month').subtract(this.today.startOf('month').day(), 'day');
             var array_dates = [];
             for (var i = 0; i < 6; i++) {
                 var div = $('<div>').addClass('row week-' + (i+1) );
@@ -55,7 +55,7 @@
                     start.add(1, 'day')
                 }
                 array_dates.push(div.wrap('<p/>').parent().html());
-            }
+            }            
             var month = this.today.format('MMMM');
             var year = this.today.format('GGGG');
             return {
