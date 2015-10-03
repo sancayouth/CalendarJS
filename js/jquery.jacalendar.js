@@ -53,11 +53,14 @@
                 var div = $('<div>').addClass('row week-' + (i + 1));
                 for (var j = 0; j < 7; j++) {
                     var inner_div = $('<div>').addClass('col-1').attr('data-date', start.format('YYYY-MM-DD')).html(parseInt(start.format('DD')));
+                    if (this.today.month() != start.month())
+                        inner_div.addClass('disabled')
                     div.append(inner_div);
                     start.add(1, 'day')
                 }
                 array_dates.push(div.wrap('<p/>').parent().html());
             }
+
             var month = this.today.format('MMMM');
             var year = this.today.format('GGGG');
             return {
