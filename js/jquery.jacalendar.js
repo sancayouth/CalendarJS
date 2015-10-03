@@ -46,7 +46,8 @@
             return result;
         },
         _getData: function() {
-            var start = this.today.clone().startOf('month').subtract(this.today.startOf('month').day(), 'day');
+            var position = this.today.startOf('month').day() == 0 ? 7 : this.today.startOf('month').day();
+            var start = this.today.clone().startOf('month').subtract(position, 'day');
             var array_dates = [];
             for (var i = 0; i < 6; i++) {
                 var div = $('<div>').addClass('row week-' + (i + 1));
@@ -91,9 +92,7 @@
             var self = event.data.ctx;
             self.today.add(1, 'month');
             self.render();
-        },
-
-
+        }
     }
 
     $.fn.jaCal = function(options) {
