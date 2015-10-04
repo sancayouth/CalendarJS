@@ -46,15 +46,20 @@
             return result;
         },
         _getData: function() {
-            var position = this.today.startOf('month').day() == 0 ? 7 : this.today.startOf('month').day();
-            var start = this.today.clone().startOf('month').subtract(position, 'day');
+            var today = this.today.clone();
+            var position = today.startOf('month').day() == 0 ? 7 : today.startOf('month').day();
+            var start = today.startOf('month').subtract(position, 'day');
             var array_dates = [];
             for (var i = 0; i < 6; i++) {
                 var div = $('<div>').addClass('row jacal-week-' + (i + 1));
                 for (var j = 0; j < 7; j++) {
-                    var inner_div = $('<div>').addClass('col-1 jacal-day').attr('data-date', start.format('YYYY-MM-DD')).html(parseInt(start.format('DD')));
-                    if (this.today.month() != start.month())
-                        inner_div.addClass('disabled')
+                    var inner_div = $('<div>').addClass('col-1 jacal-day')
+                                              .attr('data-date', start.format('YYYY-MM-DD'))
+                                              .html(parseInt(start.format('DD')));                                        
+                    if (!this.today.isSame(start, 'month'))
+                        inner_div.addClass('disabled');
+                    if (moment().isSame(start, 'day'))
+                        inner_div.addClass('today');
                     div.append(inner_div);
                     start.add(1, 'day')
                 }
