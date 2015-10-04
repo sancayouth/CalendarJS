@@ -1,7 +1,7 @@
 Calendar JS
 ===
 
-Simple calendar in js, It was created only for learning purposes.
+Simple calendar in js, It was created only for learning purposes. (Work In Progress)
 
 Dependencies
 ------------
