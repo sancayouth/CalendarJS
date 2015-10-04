@@ -1,15 +1,15 @@
      <div class="jacal-container">
         <div class="jacal-top row">
-          <div class="col-5"><%= top.month %> <%= top.year %></div>
           <div class="jacal-control-buttons">
             <div class="jacal-prev-button col-1">prev</div>
+            <div class="col-5"><%= top.month %> <%= top.year %></div>      
             <div class="jacal-next-button col-1">next</div>
           </div>                
         </div>
         
         <div class="jacal-header row">
           <% _.each(weekdays, function(name){ %>
-		    <div class="col-1"><%= name %></div>
+		    <div class="jacal-header-day col-1 "><%= name %></div>
 	      <% }) %>
         </div>
         <div class="jacal-body">
