@@ -50,9 +50,9 @@
             var start = this.today.clone().startOf('month').subtract(position, 'day');
             var array_dates = [];
             for (var i = 0; i < 6; i++) {
-                var div = $('<div>').addClass('row week-' + (i + 1));
+                var div = $('<div>').addClass('row jacal-week-' + (i + 1));
                 for (var j = 0; j < 7; j++) {
-                    var inner_div = $('<div>').addClass('col-1').attr('data-date', start.format('YYYY-MM-DD')).html(parseInt(start.format('DD')));
+                    var inner_div = $('<div>').addClass('col-1 jacal-day').attr('data-date', start.format('YYYY-MM-DD')).html(parseInt(start.format('DD')));
                     if (this.today.month() != start.month())
                         inner_div.addClass('disabled')
                     div.append(inner_div);
@@ -78,7 +78,7 @@
                 }, this.prevMonth)
                 .on('click', '.jacal-next-button', {
                     ctx: this
-                }, this.nextMonth)
+                }, this.nextMonth);                
         },
         //public methods
         render: function() {
