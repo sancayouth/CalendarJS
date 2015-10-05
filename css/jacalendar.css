@@ -47,13 +47,14 @@
     width: 100%;
 }
 .jacal-top {
-  padding: 10px 0;
+    padding: 10px 0;
 }
 .jacal-control-buttons {
+    font-size: 18px;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
-    -ms-user-select: none;
+    -ms-user-select: none; 
 }
 .jacal-control-buttons,
 .jacal-header,
@@ -64,28 +65,28 @@
 .jacal-day,
 .jacal-header-day {
     border: 1px solid black;
+    font-size: 18px;
 }
 .jacal-header-day {
-  background-color: #9C27B0;
-  padding: 15px 0;    
+    background-color: #9C27B0;
+    padding: 15px 0;
 }
 .jacal-day {
     padding: 25px 0;
 }
 .col-1.jacal-day.today:hover,
-.jacal-day:hover{
-  background-color: #BA68C8;
+.jacal-day:hover {
+    background-color: #BA68C8;
 }
-.col-1.jacal-day.today{
-  background-color: #E040FB;
+.col-1.jacal-day.today {
+    background-color: #E040FB;
 }
-.col-1.jacal-day.disabled{
-  background-color: #F3E5F5;
+.col-1.jacal-day.disabled {
+    background-color: #F3E5F5;
 }
-.col-1.jacal-day.disabled:hover{
-  background-color: #E1BEE7;
+.col-1.jacal-day.disabled:hover {
+    background-color: #E1BEE7;
 }
-
-#calendar{
-  max-width: 650px;
+#calendar {
+    max-width: 650px;
 }
