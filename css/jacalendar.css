@@ -55,6 +55,7 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none; 
+    -o-user-select: none; 
 }
 .jacal-control-buttons,
 .jacal-header,
@@ -72,7 +73,12 @@
     padding: 15px 0;
 }
 .jacal-day {
-    padding: 25px 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    padding: 25px 0;  
 }
 .col-1.jacal-day.today:hover,
 .jacal-day:hover {
