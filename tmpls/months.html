@@ -1,0 +1,14 @@
+<div class="jacal-container">
+        <div class="jacal-top row">
+          <div class="jacal-control-buttons">
+            <div class="jacal-prev-year-button col-1">prev</div>
+            <div class="jacal-year-button col-5"><%= year %></div>      
+            <div class="jacal-next-year-button col-1">next</div>
+          </div>                
+        </div>
+        <div class="jacal-body">
+         <% _.each(months, function(html){ %>           
+		    <%= html %>		    
+	     <% }) %>
+        </div>
+</div>
