@@ -9,8 +9,11 @@
     $.jaCal.defaults = {
         name: 'jaCal',
         language: 'en',
+        view: 'month',
         tmpl_path: 'tmpls/',
-        template: ''
+        templates: {
+            month: ''
+        }
     };
 
     $.jaCal.prototype = {
@@ -22,17 +25,18 @@
             this.render();
 
         },
-        _loadTemplate: function() {
+        _loadTemplate: function(name) {
             var self = this;
-            if (self.settings.template) {
+            if (self.settings.templates[name]) {
                 return;
             }
             $.ajax({
-                url: self.settings.tmpl_path + 'month.html',
+                url: self.settings.tmpl_path + name + '.html',
                 type: 'get',
+                dataType: 'html',
                 async: false,
                 success: function(html) {
-                    self.settings.template = _.template(html);
+                    self.settings.templates[name] = _.template(html);
                 }
 
             });
@@ -45,7 +49,20 @@
             moment.locale(temp);
             return result;
         },
-        _getData: function() {
+        _bindEvents: function() {
+            this.$el
+                .on('click', '.jacal-prev-button', {
+                    ctx: this
+                }, this.prevMonth)
+                .on('click', '.jacal-next-button', {
+                    ctx: this
+                }, this.nextMonth)
+                .on('click', '.jacal-month-button', {
+                    ctx: this
+                }, this.showMonths);
+        },
+        _month: function() {
+            this._loadTemplate('month');
             var today = this.today.clone();
             var position = today.startOf('month').day() == 0 ? 7 : today.startOf('month').day();
             var start = today.startOf('month').subtract(position, 'day');
@@ -54,8 +71,8 @@
                 var div = $('<div>').addClass('row jacal-week-' + (i + 1));
                 for (var j = 0; j < 7; j++) {
                     var inner_div = $('<div>').addClass('col-1 jacal-day')
-                                              .attr('data-date', start.format('YYYY-MM-DD'))
-                                              .html(parseInt(start.format('DD')));                                        
+                        .attr('data-date', start.format('YYYY-MM-DD'))
+                        .html(parseInt(start.format('DD')));
                     if (!this.today.isSame(start, 'month'))
                         inner_div.addClass('disabled');
                     if (moment().isSame(start, 'day'))
@@ -68,28 +85,37 @@
 
             var month = this.today.format('MMMM');
             var year = this.today.format('GGGG');
-            return {
+            var values = {
                 top: {
                     month, year
                 },
                 weekdays: this._forLocale(this.settings.language, moment.weekdays),
                 dates: array_dates
-            };
+            }
+            return this.settings.templates[this.settings.view](values);
         },
-        _bindEvents: function() {
-            this.$el
-                .on('click', '.jacal-prev-button', {
-                    ctx: this
-                }, this.prevMonth)
-                .on('click', '.jacal-next-button', {
-                    ctx: this
-                }, this.nextMonth);                
+        _months: function() {
+            this._loadTemplate('months');
+            var values = {
+                year: this.today.format('GGGG'),
+                months: this._forLocale(this.settings.language, moment.monthsShort)
+            };
+            return this.settings.templates['months'](values);
         },
         //public methods
         render: function() {
             this.$el.html('');
-            this._loadTemplate();
-            this.$el.append(this.settings.template(this._getData()));
+            this._loadTemplate(this.settings.view);
+            var data = {}
+            switch (this.settings.view) {
+                case 'month':
+                    data = this._month();
+                    break;
+                case 'months':
+                    data = this._months();
+                    break;
+            };
+            this.$el.append(data);
         },
         prevMonth: function(event) {
             var self = event.data.ctx;
@@ -99,6 +125,11 @@
         nextMonth: function(event) {
             var self = event.data.ctx;
             self.today.add(1, 'month');
+            self.render();
+        },
+        showMonths: function(event) {
+            var self = event.data.ctx;
+            self.settings.view = 'months';
             self.render();
         }
     }
