@@ -12,6 +12,7 @@
 .row:after {
     clear: both;
 }
+.col-month,
 .col-1,
 .col-2,
 .col-3,
@@ -46,6 +47,9 @@
 .col-7 {
     width: 100%;
 }
+.col-month {
+    width: 25%;
+}
 .jacal-top {
     padding: 10px 0;
 }
@@ -54,14 +58,22 @@
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
-    -ms-user-select: none; 
-    -o-user-select: none; 
+    -ms-user-select: none;
+    -o-user-select: none;
 }
 .jacal-control-buttons,
 .jacal-header,
+.jacal-month,
 .jacal-day {
     vertical-align: middle;
     text-align: center;
+}
+.jacal-month {
+    padding: 50px 0;
+    font-size: 25px;
+}
+.jacal-day {
+    padding: 25px 0;
 }
 .jacal-day,
 .jacal-header-day {
@@ -72,15 +84,16 @@
     background-color: #9C27B0;
     padding: 15px 0;
 }
+.jacal-month,
 .jacal-day {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    padding: 25px 0;  
 }
 .col-1.jacal-day.today:hover,
+.jacal-month:hover,
 .jacal-day:hover {
     background-color: #BA68C8;
 }
