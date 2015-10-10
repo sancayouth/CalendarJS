@@ -8,7 +8,7 @@
 
     $.jaCal.defaults = {
         name: 'jaCal',
-        language: 'en',
+        language: 'eN',
         view: 'month',
         tmpl_path: 'tmpls/',
         templates: {
@@ -19,7 +19,7 @@
     $.jaCal.prototype = {
         _init: function(options) {
             this.settings = $.extend(true, {}, $.jaCal.defaults, options);
-            this.today = moment();
+            this.today = moment().startOf('month');
             this.today.locale(this.settings.language);
             this._bindEvents();
             this.render();
@@ -53,13 +53,16 @@
             this.$el
                 .on('click', '.jacal-prev-button', {
                     ctx: this
-                }, this.prevMonth)
+                }, this.prev)
                 .on('click', '.jacal-next-button', {
                     ctx: this
-                }, this.nextMonth)
+                }, this.next)
                 .on('click', '.jacal-month-button', {
                     ctx: this
-                }, this.showMonths);
+                }, this._showMonths)
+                .on('click', '.jacal-month', {
+                    ctx: this
+                }, this._showMonth);
         },
         _month: function() {
             this._loadTemplate('month');
@@ -82,12 +85,10 @@
                 }
                 array_dates.push(div.wrap('<p/>').parent().html());
             }
-
-            var month = this.today.format('MMMM');
-            var year = this.today.format('GGGG');
             var values = {
                 top: {
-                    month, year
+                    month: this.today.format('MMMM'),
+                    year: this.today.year()
                 },
                 weekdays: this._forLocale(this.settings.language, moment.weekdays),
                 dates: array_dates
@@ -102,34 +103,34 @@
             };
             return this.settings.templates['months'](values);
         },
+        _showMonths: function(event) {
+            var self = event.data.ctx;
+            self.settings.view = 'months';
+            self.render();
+        },
+        _showMonth: function(event) {
+            var self = event.data.ctx;
+            //REFACTOR
+            var date_str = $(this).data('date') + '-01';
+            self.today = moment(date_str);
+            self.settings.view = 'month';
+            self.render();
+        },
         //public methods
         render: function() {
             this.$el.html('');
             this._loadTemplate(this.settings.view);
-            var data = {}
-            switch (this.settings.view) {
-                case 'month':
-                    data = this._month();
-                    break;
-                case 'months':
-                    data = this._months();
-                    break;
-            };
+            var data = this.settings.view === 'month' ? this._month() : this._months();
             this.$el.append(data);
         },
-        prevMonth: function(event) {
+        prev: function(event) {
             var self = event.data.ctx;
-            self.today.subtract(1, 'month');
+            self.today.subtract(1, self.settings.view === 'month' ? 'month' : 'year');
             self.render();
         },
-        nextMonth: function(event) {
+        next: function(event) {
             var self = event.data.ctx;
-            self.today.add(1, 'month');
-            self.render();
-        },
-        showMonths: function(event) {
-            var self = event.data.ctx;
-            self.settings.view = 'months';
+            self.today.add(1, self.settings.view === 'month' ? 'month' : 'year');
             self.render();
         }
     }
