@@ -1,3 +1,14 @@
+if (typeof jQuery === 'undefined') {
+  throw new Error('JaCalendar\'s requires jQuery')
+}
+if (typeof _ === 'undefined') {
+  throw new Error('JaCalendar\'s requires Underscore.js')
+}
+if (typeof moment === 'undefined') {
+  throw new Error('JaCalendar\'s requires Moment.js')
+}
+
+
 ;(function($, window, undefined) {
     'use strict';
 
@@ -8,7 +19,7 @@
 
     $.jaCal.defaults = {
         name: 'jaCal',
-        language: 'eN',
+        language: 'en',
         view: 'month',
         tmpl_path: 'tmpls/',
         templates: {
