@@ -1,7 +1,8 @@
-Calendar JS
+JaCalendar JS
 ===
 
-Simple calendar in js, It was created only for learning purposes. (Work In Progress)
+Simple calendar in js, It was created only for learning purposes. (Work In Progress).
+JaCalendar doesn't work if you view the page via file://.
 
 Dependencies
 ------------
@@ -9,5 +10,6 @@ Dependencies
 [Moment](http://momentjs.com/downloads/moment-with-locales.min.js)
 [Underscore](http://underscorejs.org/underscore-min.js)
 
-
-Licensed under the MIT License
+License
+------------
+Licensed under the MIT License.
