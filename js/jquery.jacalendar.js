@@ -122,8 +122,8 @@ if (typeof moment === 'undefined') {
         _showMonth: function(event) {
             var self = event.data.ctx;
             //REFACTOR
-            var date_str = $(this).data('date') + '-01';
-            self.today = moment(date_str);
+            var date_str = $(this).data('date') + '-01';          
+            self.today = moment(date_str).locale(self.settings.language);
             self.settings.view = 'month';
             self.render();
         },
