@@ -1,3 +1,5 @@
+@import url(//fonts.googleapis.com/css?family=Ubuntu)
+
 .row {
     margin: 0 -0.4em;
     -webkit-box-sizing: border-box;
@@ -53,10 +55,14 @@
 .jacal-top {
     padding: 10px 0;
 }
+.jacal-container{
+  font-family: 'Ubuntu', sans-serif;
+}
 .jacal-control-buttons,
 .jacal-header,
 .jacal-month,
 .jacal-day  {
+    
     vertical-align: middle;
     text-align: center;
     font-size: 18px;
