@@ -1,11 +1,11 @@
 if (typeof jQuery === 'undefined') {
-  throw new Error('JaCalendar\'s requires jQuery')
+    throw new Error('JaCalendar\'s requires jQuery')
 }
 if (typeof _ === 'undefined') {
-  throw new Error('JaCalendar\'s requires Underscore.js')
+    throw new Error('JaCalendar\'s requires Underscore.js')
 }
 if (typeof moment === 'undefined') {
-  throw new Error('JaCalendar\'s requires Moment.js')
+    throw new Error('JaCalendar\'s requires Moment.js')
 }
 
 
@@ -70,7 +70,7 @@ if (typeof moment === 'undefined') {
                 }, this.next)
                 .on('click', '.jacal-month-button', {
                     ctx: this
-                }, this._showMonths)
+                }, this._showMonthsShort)
                 .on('click', '.jacal-month', {
                     ctx: this
                 }, this._showMonth);
@@ -82,7 +82,7 @@ if (typeof moment === 'undefined') {
             var start = today.startOf('month').subtract(position, 'day');
             var array_dates = [];
             for (var i = 0; i < 6; i++) {
-                var div = $('<div>').addClass('row jacal-week-' + (i + 1));
+                var div = $('<div class="row jacal-week-' + (i + 1) + '"></div>');
                 for (var j = 0; j < 7; j++) {
                     var inner_div = $('<div>').addClass('col-1 jacal-day')
                         .attr('data-date', start.format('YYYY-MM-DD'))
@@ -106,7 +106,7 @@ if (typeof moment === 'undefined') {
             }
             return this.settings.templates[this.settings.view](values);
         },
-        _months: function() {
+        _monthsShort: function() {
             this._loadTemplate('months');
             var values = {
                 year: this.today.format('GGGG'),
@@ -114,15 +114,14 @@ if (typeof moment === 'undefined') {
             };
             return this.settings.templates['months'](values);
         },
-        _showMonths: function(event) {
+        _showMonthsShort: function(event) {
             var self = event.data.ctx;
             self.settings.view = 'months';
             self.render();
         },
         _showMonth: function(event) {
             var self = event.data.ctx;
-            //REFACTOR
-            var date_str = $(this).data('date') + '-01';          
+            var date_str = $(this).data('date') + '-01';
             self.today = moment(date_str).locale(self.settings.language);
             self.settings.view = 'month';
             self.render();
@@ -131,7 +130,7 @@ if (typeof moment === 'undefined') {
         render: function() {
             this.$el.html('');
             this._loadTemplate(this.settings.view);
-            var data = this.settings.view === 'month' ? this._month() : this._months();
+            var data = this.settings.view === 'month' ? this._month() : this._monthsShort();
             this.$el.append(data);
         },
         prev: function(event) {
