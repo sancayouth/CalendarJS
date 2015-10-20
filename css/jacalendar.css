@@ -79,6 +79,12 @@
 .jacal-day {
     padding: 25px 0;
 }
+.jacal-day-number {
+	position: relative;
+    text-align: left;
+    bottom: 25px;    
+    left: 5px;
+}
 .jacal-day,
 .jacal-header-day {
     border: 1px solid black;

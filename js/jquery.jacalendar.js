@@ -93,7 +93,7 @@ if (typeof moment === 'undefined') {
                 for (var j = 0; j < 7; j++) {
                     var inner_div = $('<div>').addClass('col-1 jacal-day')
                         .attr('data-date', start.format('YYYY-MM-DD'))
-                        .html(parseInt(start.format('DD')));
+					    .append('<div class="jacal-day-number">' + start.format('DD') + '</div>');
                     if (!this.today.isSame(start, 'month'))
                         inner_div.addClass('disabled');
                     if (moment().isSame(start, 'day'))
