@@ -133,6 +133,15 @@ if (typeof moment === 'undefined') {
             self.render();
         },
         //public methods
+        setDate: function(date) {
+            if (moment(date).isValid()) {
+                this.today = moment(date).locale(this.options.language);
+                this.options.view = 'month';
+                this.render();
+            }else{
+				throw new Error('Invalid Date');
+			}
+        },
         getYear: function() {
             return this.today.year();
         },
