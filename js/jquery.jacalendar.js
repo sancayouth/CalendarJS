@@ -1,3 +1,9 @@
+/**
+ * jquery.jacalendar.js
+ *
+ * Licensed under the MIT license.
+ */
+
 if (typeof jQuery === 'undefined') {
     throw new Error('JaCalendar\'s requires jQuery')
 }
@@ -127,6 +133,15 @@ if (typeof moment === 'undefined') {
             self.render();
         },
         //public methods
+        getYear: function() {
+            return this.today.year();
+        },
+        getMonth: function() {
+            return this.today.month() + 1;
+        },
+        getMonthName: function() {
+            return this.today.format('MMMM');
+        },
         render: function() {
             this.$el.html('');
             this._loadTemplate(this.settings.view);
