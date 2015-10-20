@@ -35,6 +35,7 @@ if (typeof moment === 'undefined') {
 
     $.jaCal.prototype = {
         _init: function(options) {
+            this.pluginName = 'JaCal';
             this.options = $.extend(true, {}, $.jaCal.defaults, options);
             this.today = moment().startOf('month');
             this.today.locale(this.options.language);
@@ -138,9 +139,9 @@ if (typeof moment === 'undefined') {
                 this.today = moment(date).locale(this.options.language);
                 this.options.view = 'month';
                 this.render();
-            }else{
-				throw new Error('Invalid Date');
-			}
+            } else {
+                throw new Error('Invalid Date');
+            }
         },
         getYear: function() {
             return this.today.year();
