@@ -35,25 +35,25 @@ if (typeof moment === 'undefined') {
 
     $.jaCal.prototype = {
         _init: function(options) {
-            this.settings = $.extend(true, {}, $.jaCal.defaults, options);
+            this.options = $.extend(true, {}, $.jaCal.defaults, options);
             this.today = moment().startOf('month');
-            this.today.locale(this.settings.language);
+            this.today.locale(this.options.language);
             this._bindEvents();
             this.render();
 
         },
         _loadTemplate: function(name) {
             var self = this;
-            if (self.settings.templates[name]) {
+            if (self.options.templates[name]) {
                 return;
             }
             $.ajax({
-                url: self.settings.tmpl_path + name + '.html',
+                url: self.options.tmpl_path + name + '.html',
                 type: 'get',
                 dataType: 'html',
                 async: false,
                 success: function(html) {
-                    self.settings.templates[name] = _.template(html);
+                    self.options.templates[name] = _.template(html);
                 }
 
             });
@@ -107,29 +107,29 @@ if (typeof moment === 'undefined') {
                     month: this.today.format('MMMM'),
                     year: this.today.year()
                 },
-                weekdays: this._forLocale(this.settings.language, moment.weekdays),
+                weekdays: this._forLocale(this.options.language, moment.weekdays),
                 dates: array_dates
             }
-            return this.settings.templates[this.settings.view](values);
+            return this.options.templates[this.options.view](values);
         },
         _monthsShort: function() {
             this._loadTemplate('months');
             var values = {
                 year: this.today.format('GGGG'),
-                months: this._forLocale(this.settings.language, moment.monthsShort)
+                months: this._forLocale(this.options.language, moment.monthsShort)
             };
-            return this.settings.templates['months'](values);
+            return this.options.templates['months'](values);
         },
         _showMonthsShort: function(event) {
             var self = event.data.ctx;
-            self.settings.view = 'months';
+            self.options.view = 'months';
             self.render();
         },
         _showMonth: function(event) {
             var self = event.data.ctx;
             var date_str = $(this).data('date') + '-01';
-            self.today = moment(date_str).locale(self.settings.language);
-            self.settings.view = 'month';
+            self.today = moment(date_str).locale(self.options.language);
+            self.options.view = 'month';
             self.render();
         },
         //public methods
@@ -144,18 +144,18 @@ if (typeof moment === 'undefined') {
         },
         render: function() {
             this.$el.html('');
-            this._loadTemplate(this.settings.view);
-            var data = this.settings.view === 'month' ? this._month() : this._monthsShort();
+            this._loadTemplate(this.options.view);
+            var data = this.options.view === 'month' ? this._month() : this._monthsShort();
             this.$el.append(data);
         },
         prev: function(event) {
             var self = event.data.ctx;
-            self.today.subtract(1, self.settings.view === 'month' ? 'month' : 'year');
+            self.today.subtract(1, self.options.view === 'month' ? 'month' : 'year');
             self.render();
         },
         next: function(event) {
             var self = event.data.ctx;
-            self.today.add(1, self.settings.view === 'month' ? 'month' : 'year');
+            self.today.add(1, self.options.view === 'month' ? 'month' : 'year');
             self.render();
         }
     }
