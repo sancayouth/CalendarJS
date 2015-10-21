@@ -116,6 +116,8 @@ if (typeof moment === 'undefined') {
                     var inner_div = $('<div>').addClass('col-1 jacal-day')
                         .attr('data-date', start.format('YYYY-MM-DD'))
                         .append('<div class="jacal-day-number">' + start.format('DD') + '</div>');
+					if (_.findWhere(this.options.events, {'date': start.format('YYYY-MM-DD')}))
+						inner_div.addClass('event');									
                     if (!this.today.isSame(start, 'month'))
                         inner_div.addClass('disabled');
                     if (moment().isSame(start, 'day'))
