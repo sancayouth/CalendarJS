@@ -49,7 +49,7 @@ if (typeof moment === 'undefined') {
         _loadEvents: function() {
             var self = this;
             var events = [];
-            if (self.options.events_source) {
+            if (self.options.events_source.length) {
                 $.ajax({
                     url: self.options.events_source,
                     dataType: 'json',
