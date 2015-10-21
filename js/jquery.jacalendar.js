@@ -27,6 +27,8 @@ if (typeof moment === 'undefined') {
         name: 'jaCal',
         language: 'en',
         view: 'month',
+        events_source: '',
+        events: [],
         tmpl_path: 'tmpls/',
         templates: {
             month: ''
@@ -41,7 +43,27 @@ if (typeof moment === 'undefined') {
             this.today.locale(this.options.language);
             this._bindEvents();
             this.render();
+            this._loadEvents();
 
+        },
+        _loadEvents: function() {
+            var self = this;
+            var events = [];
+            if (self.options.events_source) {
+                $.ajax({
+                    url: self.options.events_source,
+                    dataType: 'json',
+                    type: 'GET',
+                    async: false
+                }).done(function(json) {
+                    if (json.events) {
+                        events = json.events;
+                    }
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    throw errorThrown;
+                });
+                self.options.events = events;
+            }
         },
         _loadTemplate: function(name) {
             var self = this;
@@ -93,7 +115,7 @@ if (typeof moment === 'undefined') {
                 for (var j = 0; j < 7; j++) {
                     var inner_div = $('<div>').addClass('col-1 jacal-day')
                         .attr('data-date', start.format('YYYY-MM-DD'))
-					    .append('<div class="jacal-day-number">' + start.format('DD') + '</div>');
+                        .append('<div class="jacal-day-number">' + start.format('DD') + '</div>');
                     if (!this.today.isSame(start, 'month'))
                         inner_div.addClass('disabled');
                     if (moment().isSame(start, 'day'))

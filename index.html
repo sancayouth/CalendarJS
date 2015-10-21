@@ -7,15 +7,17 @@
     <link rel="stylesheet" href="css/jacalendar.css">
     <link rel="stylesheet" href="css/demo.css">
 </head>
-<body>    
+<body>
     <div id="calendar">
     </div>
     <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="js/moment-with-locales.min.js"></script>    
+    <script type="text/javascript" src="js/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="js/underscore-min.js"></script>
     <script type="text/javascript" src="js/jquery.jacalendar.js"></script>
     <script>
-        var jacal = $('#calendar').jaCal();
+        var jacal = $('#calendar').jaCal({
+            events_source: 'events.json'
+        });
     </script>
 </body>
 </html>
