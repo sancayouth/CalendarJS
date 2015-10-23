@@ -1,5 +1,5 @@
-@import url(//fonts.googleapis.com/css?family=Ubuntu)
-
+@import url(//fonts.googleapis.com/css?family=Ubuntu) 
+	
 .row {
     margin: 0 -0.4em;
     -webkit-box-sizing: border-box;
@@ -55,14 +55,13 @@
 .jacal-top {
     padding: 10px 0;
 }
-.jacal-container{
-  font-family: 'Ubuntu', sans-serif;
+.jacal-container {
+    font-family: 'Ubuntu', sans-serif;
 }
 .jacal-control-buttons,
 .jacal-header,
 .jacal-month,
-.jacal-day  {
-    
+.jacal-day {
     vertical-align: middle;
     text-align: center;
     font-size: 18px;
@@ -78,20 +77,15 @@
 }
 .jacal-day {
     padding: 25px 0;
-}
-.jacal-day-number {
-	position: relative;
-    text-align: left;
-    bottom: 25px;    
-    left: 5px;
+    font-size: 20px;
 }
 .jacal-day,
 .jacal-header-day {
     border: 1px solid black;
-    font-size: 18px;
 }
 .jacal-header-day {
     background-color: #9C27B0;
+    font-size: 18px;
     padding: 15px 0;
 }
 .jacal-month,
@@ -116,6 +110,12 @@
 .col-1.jacal-day.disabled:hover {
     background-color: #E1BEE7;
 }
-#calendar {
-    max-width: 650px;
+.event:after {
+	content: '\00B7';
+	position: absolute;
+	width: 20px;
+	margin-left: -10px;	
+	color: #9C27B0;
+	font-size: 70px;
+	line-height: 7px;
 }
