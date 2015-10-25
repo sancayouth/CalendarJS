@@ -110,7 +110,7 @@ if (typeof moment === 'undefined') {
                     ctx: this
                 }, this._closeEventsPerDay);
         },
-        _month: function() {
+        _getMonthToRender: function() {
             this._loadTemplate('month');
             var today = this.today.clone();
             var position = today.startOf('month').day() == 0 ? 7 : today.startOf('month').day();
@@ -143,7 +143,7 @@ if (typeof moment === 'undefined') {
             }
             return this.options.templates[this.options.view](values);
         },
-        _monthsShort: function() {
+        _getMonthsShortToRender: function() {
             this._loadTemplate('months');
             var values = {
                 year: this.today.format('GGGG'),
@@ -207,10 +207,10 @@ if (typeof moment === 'undefined') {
             var data = null;
             switch (this.options.view) {
                 case 'month':
-                    data = this._month();
+                    data = this._getMonthToRender();
                     break;
                 case 'months':
-                    data = this._monthsShort();
+                    data = this._getMonthsShortToRender();
                     break;
                 default:
                     data = this._getEventstoRender();
