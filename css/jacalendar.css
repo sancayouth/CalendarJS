@@ -57,11 +57,16 @@
 }
 .jacal-container {
     font-family: 'Ubuntu', sans-serif;
+	background-color: #FFF;
+	min-height: 550px;
 }
 .jacal-control-buttons,
+.jacal-day-top,
+.jacal-close-button,
+.jacal-event,
 .jacal-header,
 .jacal-month,
-.jacal-day {
+.jacal-day{
     vertical-align: middle;
     text-align: center;
     font-size: 18px;
@@ -89,7 +94,7 @@
     padding: 15px 0;
 }
 .jacal-month,
-.jacal-day {
+.jacal-day{
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
@@ -118,4 +123,25 @@
 	color: #9C27B0;
 	font-size: 70px;
 	line-height: 7px;
+}
+.jacal-close-button {
+	font-size: 25px;	
+	width: 30px;
+	height:30px;
+	color:#fff;
+	background-color: #9C27B0;
+	float: right;
+}
+.jacal-event {
+	text-align: justify;
+	padding: 10px 0;
+	border-bottom: 1px solid black;
+	-webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+.jacal-event:hover {
+	background-color: #E1BEE7;
 }
