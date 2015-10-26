@@ -152,11 +152,12 @@ if (typeof moment === 'undefined') {
             return this.options.templates[this.options.view](values);
         },
         _getEventstoRender: function() {
-            this._loadTemplate('events');
+            this._loadTemplate('events');	
+			var _events = _.where(this.options.events, {'date': this.today.format('YYYY-MM-DD')});
 			var values = {
-                events : _.findWhere(this.options.events, {'date': this.today.format('YYYY-MM-DD')}),
+                events: _.pluck(_events, 'title'),
                 day: this.today.format('YYYY-MM-DD')
-            };			
+            };		
             return this.options.templates[this.options.view](values);
         },
         _showMonthsShort: function(event) {
