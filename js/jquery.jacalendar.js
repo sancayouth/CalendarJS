@@ -135,6 +135,8 @@ if (typeof moment === 'undefined') {
                         'date': start.format('YYYY-MM-DD')
                     }))
                         inner_div.addClass('event');
+					if (start.day() == 0)
+						inner_div.addClass('sunday')
                     if (!this.today.isSame(start, 'month'))
                         inner_div.addClass('disabled');
                     if (moment().isSame(start, 'day'))
