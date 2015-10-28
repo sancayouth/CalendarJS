@@ -44,7 +44,6 @@ if (typeof moment === 'undefined') {
             this._bindEvents();
             this.render();
             this._loadEvents();
-
         },
         _loadEvents: function() {
             var self = this;
@@ -90,6 +89,8 @@ if (typeof moment === 'undefined') {
             return result;
         },
         _bindEvents: function() {
+            var rT;
+            var self = this;
             this.$el
                 .on('click', '.jacal-prev-button', {
                     ctx: this
@@ -106,9 +107,17 @@ if (typeof moment === 'undefined') {
                 .on('click', '.event', {
                     ctx: this
                 }, this._showEventsPerDay)
-				.on('click', '.jacal-close-button', {
+                .on('click', '.jacal-close-button', {
                     ctx: this
-                }, this._closeEventsPerDay);
+                }, this._closeEventsPerDay);			
+            $(window).on('resize', function() {
+                if (self.options.view == 'month') {
+                    clearTimeout(rT);
+                    rT = setTimeout(function() {
+                        self.render();
+                    }, 100)
+                }
+            });
         },
         _getMonthToRender: function() {
             this._loadTemplate('month');
@@ -122,7 +131,9 @@ if (typeof moment === 'undefined') {
                     var inner_div = $('<div>').addClass('col-1 jacal-day')
                         .attr('data-date', start.format('YYYY-MM-DD'))
                         .append('<div class="jacal-day-number">' + start.format('DD') + '</div>');
-                    if (_.findWhere(this.options.events, {'date': start.format('YYYY-MM-DD')}))
+                    if (_.findWhere(this.options.events, {
+                        'date': start.format('YYYY-MM-DD')
+                    }))
                         inner_div.addClass('event');
                     if (!this.today.isSame(start, 'month'))
                         inner_div.addClass('disabled');
@@ -133,12 +144,16 @@ if (typeof moment === 'undefined') {
                 }
                 array_dates.push(div.wrap('<p/>').parent().html());
             }
+            var daysName = this._forLocale(this.options.language, moment.weekdays);
+            if (this.$el.width() < 460) {
+                daysName = this._forLocale(this.options.language, moment.weekdaysShort);
+            }
             var values = {
                 top: {
                     month: this.today.format('MMMM'),
                     year: this.today.year()
                 },
-                weekdays: this._forLocale(this.options.language, moment.weekdays),
+                weekdays: daysName,
                 dates: array_dates
             }
             return this.options.templates[this.options.view](values);
@@ -152,12 +167,14 @@ if (typeof moment === 'undefined') {
             return this.options.templates[this.options.view](values);
         },
         _getEventstoRender: function() {
-            this._loadTemplate('events');	
-			var _events = _.where(this.options.events, {'date': this.today.format('YYYY-MM-DD')});
-			var values = {
+            this._loadTemplate('events');
+            var _events = _.where(this.options.events, {
+                'date': this.today.format('YYYY-MM-DD')
+            });
+            var values = {
                 events: _.pluck(_events, 'title'),
                 day: this.today.format('YYYY-MM-DD')
-            };		
+            };
             return this.options.templates[this.options.view](values);
         },
         _showMonthsShort: function(event) {
@@ -178,11 +195,11 @@ if (typeof moment === 'undefined') {
             self.options.view = 'events';
             self.render();
         },
-		_closeEventsPerDay: function(event) {
-			var self = event.data.ctx;
-			 self.options.view = 'month';
-             self.render();
-		},
+        _closeEventsPerDay: function(event) {
+            var self = event.data.ctx;
+            self.options.view = 'month';
+            self.render();
+        },
         //public methods
         setDate: function(date) {
             if (moment(date).isValid()) {
