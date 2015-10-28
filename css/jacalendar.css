@@ -75,6 +75,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     -o-user-select: none;
+	user-select: none;
 }
 .jacal-month {
     padding: 50px 0;
@@ -115,14 +116,9 @@
 .col-1.jacal-day.disabled:hover {
     background-color: #E1BEE7;
 }
-.event:after {
-	content: '\00B7';
-	position: absolute;
-	width: 20px;
-	margin-left: -10px;	
-	color: #9C27B0;
-	font-size: 70px;
-	line-height: 7px;
+.jacal-prev-button,
+.jacal-next-button {	
+	font-size: 25px;
 }
 .jacal-close-button {
 	font-size: 25px;	
@@ -131,6 +127,15 @@
 	color:#fff;
 	background-color: #9C27B0;
 	float: right;
+}
+.event:after {
+	content: '\00B7';
+	position: absolute;
+	width: 20px;
+	margin-left: -10px;	
+	color: #9C27B0;
+	font-size: 70px;
+	line-height: 7px;
 }
 .jacal-event {
 	text-align: justify;
