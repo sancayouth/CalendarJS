@@ -5,20 +5,20 @@
  */
 
 if (typeof jQuery === 'undefined') {
-    throw new Error('JaCalendar\'s requires jQuery')
+    throw new Error('JaCalendar\'s requires jQuery');
 }
 if (typeof _ === 'undefined') {
-    throw new Error('JaCalendar\'s requires Underscore.js')
+    throw new Error('JaCalendar\'s requires Underscore.js');
 }
 if (typeof moment === 'undefined') {
-    throw new Error('JaCalendar\'s requires Moment.js')
+    throw new Error('JaCalendar\'s requires Moment.js');
 }
 
 
 ;(function($, window, undefined) {
     'use strict';
 
-    $.jaCal = function(options, element) {
+    $.jaCal = function (options, element) {
         this.$el = $(element);
         this._init(options);
     };
@@ -36,7 +36,7 @@ if (typeof moment === 'undefined') {
     };
 
     $.jaCal.prototype = {
-        _init: function(options) {
+        _init: function (options) {
             this.pluginName = 'JaCal';
             this.options = $.extend(true, {}, $.jaCal.defaults, options);
             this.today = moment().startOf('month');
@@ -45,7 +45,7 @@ if (typeof moment === 'undefined') {
             this.render();
             this._loadEvents();
         },
-        _loadEvents: function() {
+        _loadEvents: function () {
             var self = this;
             var events = [];
             if (self.options.events_source.length) {
@@ -54,17 +54,17 @@ if (typeof moment === 'undefined') {
                     dataType: 'json',
                     type: 'GET',
                     async: false
-                }).done(function(json) {
+                }).done(function (json) {
                     if (json.events) {
                         events = json.events;
                     }
-                }).fail(function(jqXHR, textStatus, errorThrown) {
+                }).fail(function (jqXHR, textStatus, errorThrown) {
                     throw errorThrown;
                 });
                 self.options.events = events;
             }
         },
-        _loadTemplate: function(name) {
+        _loadTemplate: function (name) {
             var self = this;
             if (self.options.templates[name]) {
                 return;
@@ -74,21 +74,21 @@ if (typeof moment === 'undefined') {
                 type: 'get',
                 dataType: 'html',
                 async: false,
-                success: function(html) {
+                success: function (html) {
                     self.options.templates[name] = _.template(html);
                 }
 
             });
         },
         //https://github.com/moment/moment/issues/2433
-        _forLocale: function(locale, fn) {
+        _forLocale: function (locale, fn) {
             var temp = moment.locale();
             moment.locale(locale);
             var result = fn();
             moment.locale(temp);
             return result;
         },
-        _bindEvents: function() {
+        _bindEvents: function () {
             var rT;
             var self = this;
             this.$el
@@ -109,20 +109,20 @@ if (typeof moment === 'undefined') {
                 }, this._showEventsPerDay)
                 .on('click', '.jacal-close-button', {
                     ctx: this
-                }, this._closeEventsPerDay);			
+                }, this._closeEventsPerDay);
             $(window).on('resize', function() {
-                if (self.options.view == 'month') {
+                if (self.options.view === 'month') {
                     clearTimeout(rT);
                     rT = setTimeout(function() {
                         self.render();
-                    }, 100)
+                    }, 100);
                 }
             });
         },
-        _getMonthToRender: function() {
+        _getMonthToRender: function () {
             this._loadTemplate('month');
             var today = this.today.clone();
-            var position = today.startOf('month').day() == 0 ? 7 : today.startOf('month').day();
+            var position = today.startOf('month').day() === 0 ? 7 : today.startOf('month').day();
             var start = today.startOf('month').subtract(position, 'day');
             var array_dates = [];
             for (var i = 0; i < 6; i++) {
@@ -135,8 +135,8 @@ if (typeof moment === 'undefined') {
                         'date': start.format('YYYY-MM-DD')
                     }))
                         inner_div.addClass('event');
-					if (start.day() == 0)
-						inner_div.addClass('sunday')
+                    if (start.day() == 0)
+                        inner_div.addClass('sunday')
                     if (!this.today.isSame(start, 'month'))
                         inner_div.addClass('disabled');
                     if (moment().isSame(start, 'day'))
@@ -160,7 +160,7 @@ if (typeof moment === 'undefined') {
             }
             return this.options.templates[this.options.view](values);
         },
-        _getMonthsShortToRender: function() {
+        _getMonthsShortToRender: function () {
             this._loadTemplate('months');
             var values = {
                 year: this.today.format('GGGG'),
@@ -168,7 +168,7 @@ if (typeof moment === 'undefined') {
             };
             return this.options.templates[this.options.view](values);
         },
-        _getEventstoRender: function() {
+        _getEventstoRender: function () {
             this._loadTemplate('events');
             var _events = _.where(this.options.events, {
                 'date': this.today.format('YYYY-MM-DD')
@@ -179,31 +179,31 @@ if (typeof moment === 'undefined') {
             };
             return this.options.templates[this.options.view](values);
         },
-        _showMonthsShort: function(event) {
+        _showMonthsShort: function (event) {
             var self = event.data.ctx;
             self.options.view = 'months';
             self.render();
         },
-        _showMonth: function(event) {
+        _showMonth: function (event) {
             var self = event.data.ctx;
             var date_str = $(this).data('date') + '-01';
             self.today = moment(date_str).locale(self.options.language);
             self.options.view = 'month';
             self.render();
         },
-        _showEventsPerDay: function(event) {
+        _showEventsPerDay: function (event) {
             var self = event.data.ctx;
             self.today = moment($(this).data('date')).locale(self.options.language);
             self.options.view = 'events';
             self.render();
         },
-        _closeEventsPerDay: function(event) {
+        _closeEventsPerDay: function (event) {
             var self = event.data.ctx;
             self.options.view = 'month';
             self.render();
         },
         //public methods
-        setDate: function(date) {
+        setDate: function (date) {
             if (moment(date).isValid()) {
                 this.today = moment(date).locale(this.options.language);
                 this.options.view = 'month';
@@ -212,16 +212,16 @@ if (typeof moment === 'undefined') {
                 throw new Error('Invalid Date');
             }
         },
-        getYear: function() {
+        getYear: function () {
             return this.today.year();
         },
-        getMonth: function() {
+        getMonth: function () {
             return this.today.month() + 1;
         },
-        getMonthName: function() {
+        getMonthName: function () {
             return this.today.format('MMMM');
         },
-        render: function() {
+        render: function () {
             this.$el.html('');
             this._loadTemplate(this.options.view);
             var data = null;
@@ -238,19 +238,19 @@ if (typeof moment === 'undefined') {
             }
             this.$el.append(data);
         },
-        prev: function(event) {
+        prev: function (event) {
             var self = event.data.ctx;
             self.today.subtract(1, self.options.view === 'month' ? 'month' : 'year');
             self.render();
         },
-        next: function(event) {
+        next: function (event) {
             var self = event.data.ctx;
             self.today.add(1, self.options.view === 'month' ? 'month' : 'year');
             self.render();
         }
     }
 
-    $.fn.jaCal = function(options) {
+    $.fn.jaCal = function (options) {
         var instance = $.data(this, 'jaCal');
         this.each(function() {
             if (instance) {
