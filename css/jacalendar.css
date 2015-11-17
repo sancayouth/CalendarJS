@@ -1,5 +1,5 @@
-@import url(//fonts.googleapis.com/css?family=Ubuntu) 
-	
+@import url(//fonts.googleapis.com/css?family=Ubuntu)
+
 .row {
     margin: 0 -0.4em;
     -webkit-box-sizing: border-box;
@@ -120,11 +120,11 @@
     background-color: #E1BEE7;
 }
 .jacal-prev-button,
-.jacal-next-button {	
+.jacal-next-button {
 	font-size: 25px;
 }
 .jacal-close-button {
-	font-size: 25px;	
+	font-size: 25px;
 	width: 30px;
 	height:30px;
 	color:#fff;
@@ -135,7 +135,7 @@
 	content: '\00B7';
 	position: absolute;
 	width: 20px;
-	margin-left: -10px;	
+	margin-left: -10px;
 	color: #9C27B0;
 	font-size: 70px;
 	line-height: 7px;
@@ -152,4 +152,7 @@
 }
 .jacal-event:hover {
 	background-color: #E1BEE7;
+}
+.break {
+  word-break: break-all;
 }
