@@ -107,14 +107,17 @@
 .jacal-day:hover {
     background-color: #BA68C8;
 }
-.col-1.jacal-day.today {
-    background-color: #E040FB;
+.jacal-header-day.col-1.sunday{
+	color: #FF3D00;
+}
+.col-1.jacal-day.sunday {
+    color : #EA0009;
 }
 .col-1.jacal-day.disabled {
     background-color: #F3E5F5;
 }
-.col-1.jacal-day.sunday {
-    color : #EA0009;
+.col-1.jacal-day.today {
+    background-color: #E040FB;
 }
 .col-1.jacal-day.disabled:hover {
     background-color: #E1BEE7;

@@ -8,8 +8,12 @@
         </div>
         <div class="jacal-calendar">
         <div class="jacal-header row">
-          <% _.each(weekdays, function(name){ %>
-		    <div class="jacal-header-day col-1 "><%= name %></div>
+          <% _.each(weekdays, function(name, order){ %>
+            <% if (order!=0) {%>
+		    	<div class="jacal-header-day col-1"><%= name %></div>
+		    <% } else { %>
+		    	<div class="jacal-header-day col-1 sunday"><%= name %></div>
+		    <% } %>
 	      <% }) %>
         </div>
         <div class="jacal-body">
