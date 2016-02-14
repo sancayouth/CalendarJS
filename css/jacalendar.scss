@@ -1,0 +1,193 @@
+$header-color:#9C27B0;
+$container-color:#FFF;
+$sunday-color:#FF3D00;
+$today-color:#E040FB;
+$disabled-color:#F3E5F5;
+
+$family: unquote("Ubuntu");
+@import url(//fonts.googleapis.com/css?family=#{$family});
+
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    -ms-transition:     $transition;
+    transition:         $transition;
+}
+
+.row {
+    margin: 0 -0.3em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.row:before,
+.row:after {
+    content: '';
+    display: table;
+}
+.row:after {
+    clear: both;
+}
+.col-month,
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7 {
+    float: left;
+    padding: 0 0.5em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.col-1 {
+    width: 14.285714285714286%;
+}
+.col-2 {
+    width: 28.571428571428573%;
+}
+.col-3 {
+    width: 42.857142857142854%;
+}
+.col-4 {
+    width: 57.142857142857146%;
+}
+.col-5 {
+    width: 71.42857142857143%;
+}
+.col-6 {
+    width: 85.71428571428571%;
+}
+.col-7 {
+    width: 100%;
+}
+.col-month {
+    width: 25%;
+}
+
+body{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.jacal-container {
+  font-family: $family, sans-serif;
+	background-color: $container-color;
+	min-height: 550px;
+}
+
+.jacal-top {
+    padding: 10px 0;
+}
+
+.jacal-control-buttons,
+.jacal-day-top,
+.jacal-close-button,
+.jacal-event,
+.jacal-header,
+.jacal-month,
+.jacal-day{
+  vertical-align: middle;
+  text-align: center;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.jacal-prev-button,
+.jacal-next-button {
+	font-size: 25px;
+}
+
+.jacal-close-button {
+  font-size: 25px;
+  width: 30px;
+  height:30px;
+  color:#FFF;
+  background-color: $header-color;
+  float: right;
+}
+
+.jacal-month {
+  font-size: 42px;
+  padding: 60px 0;
+}
+
+.jacal-day{
+  padding: 25px 0;
+  font-size: 20px;
+}
+
+.jacal-day.sunday {
+      color : $sunday-color;
+}
+
+.jacal-day.disabled {
+    background-color: $disabled-color;
+}
+
+.jacal-day.today {
+    background-color: $today-color;
+}
+
+.jacal-day.disabled:hover {
+    background-color: #E1BEE7;
+}
+
+
+.jacal-month,
+.jacal-day{
+  @include transition(all 0.5s ease);
+}
+
+.jacal-day,
+.jacal-header-day {
+  border: 1px solid black;
+}
+
+.jacal-header-day {
+  background-color: $header-color;
+  font-size: 18px;
+  padding: 15px 0;
+}
+
+.jacal-day.today:hover,
+.jacal-month:hover,
+.jacal-day:hover {
+  background-color: #BA68C8;
+}
+
+.jacal-header-day .sunday{
+    color: #FF3D00;
+}
+
+.event:after {
+	content: '\00B7';
+	position: absolute;
+	width: 20px;
+	margin-left: -10px;
+	color: $header-color;
+	font-size: 70px;
+	line-height: 7px;
+}
+
+.jacal-event {
+  	text-align: justify;
+  	padding: 10px 0;
+  	border-bottom: 1px solid black;
+    @include transition(all 0.2s ease);
+
+    .break {
+        word-break: break-word;
+    }
+}
+
+.jacal-event:hover {
+  	background-color: #E1BEE7;
+}
