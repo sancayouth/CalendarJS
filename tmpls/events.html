@@ -1,6 +1,6 @@
 <div class="jacal-container">
-    <div class="jacal-top row">                
-        <div class="jacal-day-top col-6"><%= day %></div>
+    <div class="jacal-top row">
+        <div id="title" class="jacal-day-top col-6"><%= day %></div>
         <div class="jacal-close col-1"><div class="jacal-close-button">x</div></div>
     </div>
     <div class="jacal-events" data-date="<%= day %>">
@@ -8,6 +8,6 @@
 		    <% _.each(events, function(event){ %>
 		    	<div class="jacal-event col-7 break"><%= event %></div>
 		    <% }) %>
-		</div>	          	
+		</div>
     </div>
 </div>

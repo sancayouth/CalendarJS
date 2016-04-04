@@ -2,11 +2,11 @@
         <div class="jacal-top row">
           <div class="jacal-control-buttons">
             <div class="jacal-prev-button col-1">&#60;</div>
-            <div class="jacal-month-button col-5"><%= top.month %> <%= top.year %></div>
+            <div id="title" class="jacal-month-button col-5"><%= top.month %> <%= top.year %></div>
             <div class="jacal-next-button col-1">&#62;</div>
           </div>
         </div>
-        <div class="jacal-calendar">
+        <div class="jacal-calendar <%= direction_animation %>">
         <div class="jacal-header row">
           <% _.each(weekdays, function(name, order){ %>
             <% if (order!=0) {%>
@@ -23,4 +23,3 @@
 	     </div>
         </div>
       </div>
-      

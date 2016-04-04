@@ -1,31 +1,29 @@
-<div class="jacal-container">
-        <div class="jacal-top row">
-          <div class="jacal-control-buttons">
-            <div class="jacal-prev-button col-1">&#60;</div>
-            <div class="jacal-year-button col-5"><%= year %></div>      
-            <div class="jacal-next-button col-1">&#62;</div>
-          </div>                
-        </div>
-        <div class="jacal-body">
-          <div class="row">
-            <div class="col-month jacal-month" data-date="<%= year %>-01"><%= months[0] %></div>
-            <div class="col-month jacal-month" data-date="<%= year %>-02"><%= months[1] %></div>
-            <div class="col-month jacal-month" data-date="<%= year %>-03"><%= months[2] %></div>
-            <div class="col-month jacal-month" data-date="<%= year %>-04"><%= months[3] %></div>
-          </div>
-          <div class="row">
-            <div class="col-month jacal-month" data-date="<%= year %>-05"><%= months[4] %></div>
-            <div class="col-month jacal-month" data-date="<%= year %>-06"><%= months[5] %></div>
-            <div class="col-month jacal-month" data-date="<%= year %>-07"><%= months[6] %></div>
-            <div class="col-month jacal-month" data-date="<%= year %>-08"><%= months[7] %></div>
-          </div>
-          <div class="row">
-            <div class="col-month jacal-month" data-date="<%= year %>-09"><%= months[8] %></div>
-            <div class="col-month jacal-month" data-date="<%= year %>-10"><%= months[9] %></div>
-            <div class="col-month jacal-month" data-date="<%= year %>-11"><%= months[10] %></div>
-            <div class="col-month jacal-month" data-date="<%= year %>-12"><%= months[11] %></div>
-          </div>
-        </div>
-         
-        
+<div class="jacal-container enter">
+  <div class="jacal-top row">
+    <div class="jacal-control-buttons">
+      <div class="jacal-prev-button col-1">&#60;</div>
+      <div id="title" class="jacal-year-button col-5"><%= year %></div>
+      <div class="jacal-next-button col-1">&#62;</div>
+    </div>
+  </div>
+  <div class="jacal-body <%= direction_animation %>">
+    <div class="row">
+      <div class="col-month jacal-month" data-date="<%= year %>-01"><%= months[0] %></div>
+      <div class="col-month jacal-month" data-date="<%= year %>-02"><%= months[1] %></div>
+      <div class="col-month jacal-month" data-date="<%= year %>-03"><%= months[2] %></div>
+      <div class="col-month jacal-month" data-date="<%= year %>-04"><%= months[3] %></div>
+    </div>
+    <div class="row">
+      <div class="col-month jacal-month" data-date="<%= year %>-05"><%= months[4] %></div>
+      <div class="col-month jacal-month" data-date="<%= year %>-06"><%= months[5] %></div>
+      <div class="col-month jacal-month" data-date="<%= year %>-07"><%= months[6] %></div>
+      <div class="col-month jacal-month" data-date="<%= year %>-08"><%= months[7] %></div>
+    </div>
+    <div class="row">
+      <div class="col-month jacal-month" data-date="<%= year %>-09"><%= months[8] %></div>
+      <div class="col-month jacal-month" data-date="<%= year %>-10"><%= months[9] %></div>
+      <div class="col-month jacal-month" data-date="<%= year %>-11"><%= months[10] %></div>
+      <div class="col-month jacal-month" data-date="<%= year %>-12"><%= months[11] %></div>
+    </div>
+  </div>
 </div>

@@ -1,13 +1,13 @@
 $header-color:#9C27B0;
-$container-color:#FFF;
+$container-color:#FFFFFF;
 $sunday-color:#FF3D00;
 $today-color:#E040FB;
 $disabled-color:#F3E5F5;
 
 $family: unquote("Ubuntu");
-@import url(//fonts.googleapis.com/css?family=#{$family});
+//@import url(//fonts.googleapis.com/css?family=#{$family});
 
-@mixin transition($transition...) {
+@mixin transition($transition) {
     -moz-transition:    $transition;
     -o-transition:      $transition;
     -webkit-transition: $transition;
@@ -77,14 +77,36 @@ body{
   user-select: none;
 }
 
+@keyframes moveFromRight {
+   from { -webkit-transform: translateX(100%); ; transform: translateX(100%); }
+}
+
+@keyframes moveToLeft {
+	from {  -webkit-transform: translateX(-100%); transform: translateX(-100%); }
+}
+
 .jacal-container {
   font-family: $family, sans-serif;
 	background-color: $container-color;
 	min-height: 550px;
+  .left{
+    -webkit-animation: moveToLeft .4s ease both;
+	  animation: moveToLeft .4s ease both;
+  }
+
+  .right{
+    animation: moveFromRight  .6s ease-in both;
+  }
 }
+
+
 
 .jacal-top {
     padding: 10px 0;
+
+    #title{
+      font-size: 1.7em;
+    }
 }
 
 .jacal-control-buttons,
@@ -136,7 +158,7 @@ body{
     background-color: $today-color;
 }
 
-.jacal-day.disabled:hover {
+.disabled:hover {
     background-color: #E1BEE7;
 }
 

@@ -41,6 +41,7 @@ if (typeof moment === 'undefined') {
             this.options = $.extend(true, {}, $.jaCal.defaults, options);
             this.today = moment().startOf('month');
             this.today.locale(this.options.language);
+            this.direction = "";
             this._bindEvents();
             this.render();
             this._loadEvents();
@@ -150,22 +151,26 @@ if (typeof moment === 'undefined') {
             if (this.$el.width() < 460) {
                 daysName = this._forLocale(this.options.language, moment.weekdaysShort);
             }
-            var values = {
+		        var values = {
                 top: {
                     month: this.today.format('MMMM'),
                     year: this.today.year()
                 },
                 weekdays: daysName,
-                dates: array_dates
+                dates: array_dates,
+                direction_animation : this.direction
             }
+            this.direction = "";
             return this.options.templates[this.options.view](values);
         },
         _getMonthsShortToRender: function () {
             this._loadTemplate('months');
             var values = {
                 year: this.today.format('GGGG'),
-                months: this._forLocale(this.options.language, moment.monthsShort)
+                months: this._forLocale(this.options.language, moment.monthsShort),
+                direction_animation : this.direction
             };
+            this.direction = "";
             return this.options.templates[this.options.view](values);
         },
         _getEventstoRender: function () {
@@ -240,11 +245,13 @@ if (typeof moment === 'undefined') {
         },
         prev: function (event) {
             var self = event.data.ctx;
+            self.direction = "left";
             self.today.subtract(1, self.options.view === 'month' ? 'month' : 'year');
             self.render();
         },
         next: function (event) {
             var self = event.data.ctx;
+            self.direction = "right";
             self.today.add(1, self.options.view === 'month' ? 'month' : 'year');
             self.render();
         }
