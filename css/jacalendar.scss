@@ -3,6 +3,7 @@ $container-color:#FFFFFF;
 $sunday-color:#FF3D00;
 $today-color:#E040FB;
 $disabled-color:#F3E5F5;
+$hover:#BA68C8;
 
 $family: unquote("Ubuntu");
 //@import url(//fonts.googleapis.com/css?family=#{$family});
@@ -86,9 +87,125 @@ body{
 }
 
 .jacal-container {
+  vertical-align: middle;
+  text-align: center;
+  font-size: 18px;
+  cursor: pointer;
+
   font-family: $family, sans-serif;
 	background-color: $container-color;
 	min-height: 550px;
+
+  .jacal-top {
+      padding: 10px 0;
+
+      .jacal-control-buttons{
+
+        #title{
+          font-size: 1.7em;
+        }
+
+        .jacal-prev-button,
+        .jacal-next-button {
+        	font-size: 25px;
+        }
+      }
+
+      .jacal-close-button {
+        font-size: 25px;
+        width: 30px;
+        height:30px;
+        color:#FFF;
+        background-color: $header-color;
+        float: right;
+      }
+  }
+
+  .jacal-calendar {
+    .jacal-header{
+      .jacal-header-day {
+        background-color: $header-color;
+        font-size: 18px;
+        padding: 15px 0;
+        border: 1px solid black;
+      }
+
+      .sunday{
+          color: #FF3D00;
+      }
+    }
+
+    .jacal-body {
+
+      .jacal-day{
+        padding: 25px 0;
+        font-size: 20px;
+        @include transition(all 0.5s ease);
+        border: 1px solid black;
+      }
+
+      .jacal-day.sunday {
+            color : $sunday-color;
+      }
+
+      .jacal-day.disabled {
+          background-color: $disabled-color;
+      }
+
+      .jacal-day.today {
+          background-color: $today-color;
+      }
+
+      .disabled:hover {
+          background-color: #E1BEE7;
+      }
+
+      .jacal-day.today:hover,
+      .jacal-day:hover {
+        background-color: $hover;
+      }
+
+      .event:after {
+      	content: '\00B7';
+      	position: absolute;
+      	width: 20px;
+      	margin-left: -10px;
+      	color: $header-color;
+      	font-size: 70px;
+      	line-height: 7px;
+      }
+    }
+
+  }
+
+  .jacal-body {
+    .jacal-month {
+      font-size: 42px;
+      padding: 60px 0;
+      @include transition(all 0.5s ease);
+    }
+    .jacal-month:hover {
+      background-color: $hover;
+    }
+  }
+
+  .jacal-events{
+    .jacal-event {
+      	text-align: justify;
+      	padding: 10px 0;
+      	border-bottom: 1px solid black;
+        @include transition(all 0.2s ease);
+
+        .break {
+            word-break: break-word;
+        }
+    }
+
+    .jacal-event:hover {
+      	background-color: #E1BEE7;
+    }
+  }
+
   .left{
     -webkit-animation: moveToLeft .4s ease both;
 	  animation: moveToLeft .4s ease both;
@@ -97,119 +214,4 @@ body{
   .right{
     animation: moveFromRight  .6s ease-in both;
   }
-}
-
-
-
-.jacal-top {
-    padding: 10px 0;
-
-    #title{
-      font-size: 1.7em;
-    }
-}
-
-.jacal-control-buttons,
-.jacal-day-top,
-.jacal-close-button,
-.jacal-event,
-.jacal-header,
-.jacal-month,
-.jacal-day{
-  vertical-align: middle;
-  text-align: center;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.jacal-prev-button,
-.jacal-next-button {
-	font-size: 25px;
-}
-
-.jacal-close-button {
-  font-size: 25px;
-  width: 30px;
-  height:30px;
-  color:#FFF;
-  background-color: $header-color;
-  float: right;
-}
-
-.jacal-month {
-  font-size: 42px;
-  padding: 60px 0;
-}
-
-.jacal-day{
-  padding: 25px 0;
-  font-size: 20px;
-}
-
-.jacal-day.sunday {
-      color : $sunday-color;
-}
-
-.jacal-day.disabled {
-    background-color: $disabled-color;
-}
-
-.jacal-day.today {
-    background-color: $today-color;
-}
-
-.disabled:hover {
-    background-color: #E1BEE7;
-}
-
-
-.jacal-month,
-.jacal-day{
-  @include transition(all 0.5s ease);
-}
-
-.jacal-day,
-.jacal-header-day {
-  border: 1px solid black;
-}
-
-.jacal-header-day {
-  background-color: $header-color;
-  font-size: 18px;
-  padding: 15px 0;
-}
-
-.jacal-day.today:hover,
-.jacal-month:hover,
-.jacal-day:hover {
-  background-color: #BA68C8;
-}
-
-.jacal-header-day .sunday{
-    color: #FF3D00;
-}
-
-.event:after {
-	content: '\00B7';
-	position: absolute;
-	width: 20px;
-	margin-left: -10px;
-	color: $header-color;
-	font-size: 70px;
-	line-height: 7px;
-}
-
-.jacal-event {
-  	text-align: justify;
-  	padding: 10px 0;
-  	border-bottom: 1px solid black;
-    @include transition(all 0.2s ease);
-
-    .break {
-        word-break: break-word;
-    }
-}
-
-.jacal-event:hover {
-  	background-color: #E1BEE7;
 }
